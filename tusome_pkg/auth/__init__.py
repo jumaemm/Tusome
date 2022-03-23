@@ -1,3 +1,3 @@
 from flask import Blueprint
-bp = Blueprint('auth',__name__)
+bp = Blueprint('auth',__name__,template_folder='templates')
 from tusome_pkg.auth import routes

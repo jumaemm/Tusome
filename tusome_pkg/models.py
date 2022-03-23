@@ -12,6 +12,9 @@ class User(db.Model):
     password_hash = db.Column(db.String(60), nullable=False)
     #books = db.relationship('Book', backref='owner', lazy=True)
 
+    def __repr__(self) -> str:
+        return f'User: {self.username}'
+
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(400), nullable=False)
