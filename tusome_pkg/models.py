@@ -21,13 +21,13 @@ class Book(db.Model):
     author = db.Column(db.String(120),nullable=False)
     description = db.Column(db.String(1024), nullable=False)
     #TODO: COVER
-    reviews = db.relationship('Review', backref='reviewer', lazy=True)
+    #reviews = db.relationship('Review', backref='reviewer', lazy=True)
 
 #TODO: OWNERS
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False, unique=True)
-    book_review = db.Column(db.String(2028, nullable=False))
+    book_review = db.Column(db.String(2028))
     #TODO: Foreign_key for reviewer, book
 

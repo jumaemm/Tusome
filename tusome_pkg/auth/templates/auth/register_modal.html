@@ -1,36 +1,61 @@
 {% extends 'auth/base.html' %}
 
 {% block title %}
-    Register Page
+Register Page
 {% endblock %}
 
 {% block content %}
-    <!--TODO: POPUP MODAL-->
-    <p>Register Here</p>
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--TODO: POPUP MODAL-->
+<!-- Button trigger modal -->
 
-{%  endblock %}
+<!-- Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLabel">Register Here</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body bg-light">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group mb-3">
+                        <label for="username" >{{ form.username.label }}</label>
+                        {{ form.username(class="form-control", id="username", placeholder="Enter your Username")}}
+                        <small id="usernameHelp" class="form-text text-muted">Your unique username</small>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="emailaddress" >{{ form.email_address.label }}</label>
+                        {{ form.email_address(class="form-control", id="emailaddress", placeholder="Enter your Email address")}}
+                        <small id="emailHelp" class="form-text text-muted">The email we'll use to contact you</small>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="passwordInput">{{ form.password1.label }}</label>
+                        {{ form.password1(class="form-control", id="passwordInput", placeholder="Enter your Password")}}
+                        <small id="passwordHelp" class="form-text text-muted">Please use a secure password</small>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="passwordConfirm">{{ form.password2.label }}</label>
+                        {{form.password2(class="form-control", id="passwordConfirm", placeholder="Confirm your password")}}
+                    </div>
+                    <div class="form-group modal-footer">
+                        {{ form.submit(class="btn btn-success") }}
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function(){
+        console.log("Page loaded");
+        $('#exampleModal').modal('show');
+    })
+</script>
+{% endblock %}
