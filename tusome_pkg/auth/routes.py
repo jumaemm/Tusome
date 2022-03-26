@@ -20,6 +20,9 @@ def register():
         db.session.commit()
         print("something")
         return redirect(url_for('site.home_page'))
+    if form.errors != {}:
+        for err_msg in form.errors.values():
+            print(f'Error creating user: {err_msg}')
     return render_template('auth/register_modal.html', form = form)
 
 @bp.route('/logout')
