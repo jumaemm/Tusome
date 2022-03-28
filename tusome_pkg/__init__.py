@@ -1,13 +1,12 @@
 import os
 from flask import Flask
-from flask_migrate import Migrate
 from tusome_pkg.auth import bp as auth_bp
 from tusome_pkg.site import bp as site_bp
 from tusome_pkg.models import db
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 print(BASE_DIR)
 
-migrate = Migrate()
+
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
@@ -30,8 +29,4 @@ def create_app(test_config=None):
     db.init_app(app)
     with app.app_context():
         db.create_all()
-    print("app init")
-    #@app.route('/hello')
-    #def hello():
-    #    return render_template('site/home.html')
     return app
