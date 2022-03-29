@@ -6,13 +6,15 @@ from tusome_pkg.auth import bp
 from tusome_pkg.forms import RegisterForm, LoginForm
 from tusome_pkg.models import User, db
 
+#TODO: Roll register and login modals to site view
+
 @bp.route('/login', methods=['GET','POST'])
 def login():
     form=LoginForm()
     if form.validate_on_submit():
         hashed_password=sha256_crypt.encrypt(form.password.data)
 
-    return render_template('auth/login_modal.html')
+    return render_template('auth/login_modal.html', form = form)
 
 @bp.route('/register', methods=['GET','POST'])
 def register():
