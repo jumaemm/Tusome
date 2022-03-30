@@ -1,3 +1,5 @@
 myenv
 */__pycache__/
 instance
+auth/__pycache__
+site/__pycache__
