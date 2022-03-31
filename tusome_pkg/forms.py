@@ -3,16 +3,20 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from tusome_pkg.models import User
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
+bcrypt = Bcrypt()
+login_manager = LoginManager()
 class RegisterForm(FlaskForm):
     #Catch any errors due to similar username
     def validate_username(self, username_to_check):
-        user = User.query.filter_by(username=username_to_check.data()).first()
+        user = User.query.filter_by(username=username_to_check.data).first()
         if user:
             raise ValidationError('Username already exists! Please enter a different username')
 
     def validate_email_address(self, email_address_to_check):
-        email_address = User.query.filter_by(email_address=email_address_to_check.data()).first()
+        email_address = User.query.filter_by(email=email_address_to_check.data).first()
         if email_address:
             raise ValidationError('Email address already exists! Please login instead.')
     

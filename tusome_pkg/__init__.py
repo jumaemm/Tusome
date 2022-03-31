@@ -3,6 +3,7 @@ from flask import Flask
 from tusome_pkg.auth import bp as auth_bp
 from tusome_pkg.site import bp as site_bp
 from tusome_pkg.models import db
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
