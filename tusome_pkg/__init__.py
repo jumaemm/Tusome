@@ -3,7 +3,7 @@ from flask import Flask
 from tusome_pkg.auth import bp as auth_bp
 from tusome_pkg.site import bp as site_bp
 from tusome_pkg.models import db
-
+from flask_login import LoginManager
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -29,4 +29,10 @@ def create_app(test_config=None):
     db.init_app(app)
     with app.app_context():
         db.create_all()
+    login_manager = LoginManager(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
     return app

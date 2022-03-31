@@ -4,7 +4,7 @@ from passlib.hash import sha256_crypt
 from flask import flash, render_template, session, redirect, url_for, get_flashed_messages
 from tusome_pkg.auth import bp 
 from tusome_pkg.forms import RegisterForm, LoginForm
-from tusome_pkg.models import User, db, login_manager, bcrypt
+from tusome_pkg.models import User, db, bcrypt
 from flask_login import login_user
 #TODO: Roll register and login modals to site view
 
@@ -16,7 +16,7 @@ def login():
         if attempted_user and attempted_user.check_password_correction(password_attempt=form.password.data):
             login_user(attempted_user)
             flash(f'Successfully logged in as: {attempted_user.username}', category='success')
-            return redirect(url_for('home_page'))
+            return redirect(url_for('site.home_page'))
         else:
             flash('Username or password incorrect, please try again', category='danger')
     return render_template('auth/login_modal.html', form = form)
