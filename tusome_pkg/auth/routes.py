@@ -16,6 +16,7 @@ def login():
         if attempted_user and attempted_user.check_password_correction(password_attempt=form.password.data):
             login_user(attempted_user)
             flash(f'Successfully logged in as: {attempted_user.username}', category='success')
+            session['logged_in'] = True
             return redirect(url_for('site.home_page'))
         else:
             flash('Username or password incorrect, please try again', category='danger')
@@ -31,7 +32,7 @@ def register():
         db.session.add(user_to_create)
         db.session.commit()
         flash(f'Successfully registered as {form.username.data}', category='success')
-        return redirect(url_for('site.home_page'))
+        return redirect(url_for('auth.login'))
     if form.errors != {}: #If errors is not empty
         for err_msg in form.errors.values():
             flash(f'Error creating user: {err_msg}', category="danger")
