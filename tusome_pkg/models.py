@@ -5,6 +5,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin
+from datetime import datetime
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
@@ -21,7 +22,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(80), unique=True, nullable= False)
     password_hash = db.Column(db.String(60), nullable=False)
-    books = db.relationship('Book', secondary=books_users, backref='user' , lazy=True)
+    books = db.relationship('Book', secondary=books_users, backref='users' , lazy=True)
     reiews = db.relationship('Review', backref = 'user', lazy = True)
 
     @property
@@ -53,6 +54,7 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False, unique=True)
     book_review = db.Column(db.String(2028))
+    created = db.Column(db.DateTime, default=datetime.now())
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
