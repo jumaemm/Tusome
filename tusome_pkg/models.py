@@ -9,6 +9,11 @@ from flask_login import LoginManager, UserMixin
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 
+#intermediate table for books to users
+books_users = db.Table('books_users', 
+                        db.Column('user_id',db.Integer, db.ForeignKey('user.id'), primary_key=True), 
+                        db.Column('book_id', db.Integer, db.ForeignKey('book.id'), primary_key=True)
+)
 
 
 class User(db.Model, UserMixin):
@@ -16,7 +21,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(80), unique=True, nullable= False)
     password_hash = db.Column(db.String(60), nullable=False)
-    #books = db.relationship('Book', backref='owner', lazy=True)
+    books = db.relationship('Book', secondary=books_users, backref='user' , lazy=True)
+    reiews = db.relationship('Review', backref = 'user', lazy = True)
 
     @property
     def password(self):
@@ -38,8 +44,8 @@ class Book(db.Model):
     title = db.Column(db.String(400), nullable=False)
     author = db.Column(db.String(120),nullable=False)
     description = db.Column(db.String(1024), nullable=False)
-    #TODO: COVER
-    #reviews = db.relationship('Review', backref='reviewer', lazy=True)
+    #cover = db.Column()
+    reviews = db.relationship('Review', backref='book', lazy=True)
 
 #TODO: OWNERS
 
@@ -47,5 +53,7 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False, unique=True)
     book_review = db.Column(db.String(2028))
-    #TODO: Foreign_key for reviewer, book
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
 
