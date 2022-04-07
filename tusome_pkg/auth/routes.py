@@ -41,4 +41,5 @@ def register():
 @bp.route('/logout')
 def logout():
     session.clear()
+    flash("Successfully logged out", category='info')
     return redirect(url_for('site.home_page'))

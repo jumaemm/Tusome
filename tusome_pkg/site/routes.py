@@ -1,11 +1,11 @@
 from flask import render_template, session
 from tusome_pkg.site import bp 
-from models import Book
+#from models import Book
 import os, urllib.request, json
 
 @bp.route('/home')
 def home_page():
-    bestsellers_dict = get_bestsellers()
+    #bestsellers_dict = get_bestsellers()
     book_list = []
     i = 0
     #while i < 15:

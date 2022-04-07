@@ -11,9 +11,9 @@ Register Page
 <!-- Modal -->
 <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-dark">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content ">
+            <div class="modal-header material_bg">
                 <h5 class="modal-title text-white" id="exampleModalLabel">Register Here</h5>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                 </button>
@@ -21,27 +21,35 @@ Register Page
             <div class="modal-body bg-light">
                 <form method="POST">
                     {{ form.hidden_tag() }}
-                    <div class="form-group mb-3">
-                        <label for="username" >{{ form.username.label }}</label>
-                        {{ form.username(class="form-control", id="username", placeholder="Enter your Username")}}
+                    <div class="form-group mb-3 row">
+                        <label for="username" class="col-sm-4 col-form-label">{{ form.username.label }}</label>
+                        <div class="col-sm-7">
+                            {{ form.username(class="form-control border-0", id="username", placeholder="Enter your Username")}}
+                        </div>
                         <small id="usernameHelp" class="form-text text-muted">Your unique username</small>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="emailaddress" >{{ form.email_address.label }}</label>
-                        {{ form.email_address(class="form-control", id="emailaddress", placeholder="Enter your Email address")}}
+                    <div class="form-group mb-3 row">
+                        <label for="emailaddress" class="col-sm-4 col-form-label">{{ form.email_address.label }}</label>
+                        <div class="col-sm-7">
+                            {{ form.email_address(class="form-control border-0", id="emailaddress", placeholder="Enter your Email address")}}
+                        </div>
                         <small id="emailHelp" class="form-text text-muted">The email we'll use to contact you</small>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="passwordInput">{{ form.password1.label }}</label>
-                        {{ form.password1(class="form-control", id="passwordInput", placeholder="Enter your Password")}}
+                    <div class="form-group mb-3 row">
+                        <label for="passwordInput" class="col-sm-4 col-form-label">{{ form.password1.label }}</label>
+                        <div class="col-sm-7">
+                            {{ form.password1(class="form-control border-0", id="passwordInput", placeholder="Enter your Password")}}
+                        </div>
                         <small id="passwordHelp" class="form-text text-muted">Please use a secure password</small>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="passwordConfirm">{{ form.password2.label }}</label>
-                        {{form.password2(class="form-control", id="passwordConfirm", placeholder="Confirm your password")}}
+                    <div class="form-group mb-3 row">
+                        <label for="passwordConfirm" class="col-sm-4 col-form-label">{{ form.password2.label }}</label>
+                        <div class="col-sm-7">
+                            {{form.password2(class="form-control border-0", id="passwordConfirm", placeholder="Confirm your password")}}
+                        </div>
                     </div>
                     <div class="form-group modal-footer">
-                        {{ form.submit(class="btn btn-success") }}
+                        {{ form.submit(class="btn material_btn text-white") }}
                     </div>
                 </form>
             </div>

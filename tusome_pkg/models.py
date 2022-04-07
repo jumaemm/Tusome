@@ -45,7 +45,7 @@ class Book(db.Model):
     title = db.Column(db.String(400), nullable=False)
     author = db.Column(db.String(120),nullable=False)
     description = db.Column(db.String(1024), nullable=False)
-    #cover = db.Column()
+    #cover = db.Column() use link to s3 bucket?
     reviews = db.relationship('Review', backref='book', lazy=True)
 
 #TODO: OWNERS
