@@ -1,6 +1,39 @@
 .material_bg{
-    background-color: #1976d2;
+    background-color: #1976d2 !important;
 }
 .material_btn{
     background-color: #00b012 !important;
 }
+.material_grad{
+    background-image: linear-gradient(to right, #1976d2, );
+}
+.tusome_title{
+    font-family: Raleway;
+    font-weight: 600;
+}
+#landing_back {
+    height: 800px;
+    background-image: url("../static/images/alfons-morales-YLSwjSy7stw-unsplash.jpg");
+  }
+
+  /* Height for devices smaller than 640px */
+  @media (max-width: 640px) {
+    #landing_back {
+      height: 400px;
+    }
+  }
+  /* Height for devices between 641px and 1200px*/
+  @media (max-width: 1200px) {
+    #landing_back {
+      height: 500px;
+    }
+  }
+  body {
+      font-family: Raleway;
+  }
+  .auth_back{
+      background-image: url("../static/images/alfons-morales-YLSwjSy7stw-unsplash.jpg");
+      height: 800px;
+      background-size: cover;
+  }
+  

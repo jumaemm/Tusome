@@ -6,27 +6,38 @@
 
 {% block content %}
 <!--TODO: POPUP MODAL-->
-<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
+<div class="modal fade " 
+    id="exampleModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    data-mdb-backdrop="static"
+    data-mdb-keyboard="false">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <div class="modal-header bg-dark">
+        <div class="modal-header bg-dark bg-gradient text-white">
             <h5 class="modal-title text-white" id="exampleModalLabel">Login Here</h5>
-            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close">
             </button>
         </div>
         <div class="modal-body bg-light">
             <form method="POST">
                 {{ form.hidden_tag() }}
-                <div class="form-group mb-3">
-                    <label for="username" >{{ form.username.label }}</label>
-                    {{ form.username(class="form-control", id="username", placeholder="Enter your Username")}}
-                    <small id="usernameHelp" class="form-text text-muted">Your unique username</small>
+                <div class="form-group mb-3 row">
+                    <label for="username" class="col-sm-4 col-form-label">{{ form.username.label }}</label>
+                    <div class="col-sm-7">
+                        {{ form.username(class="form-control border-0", id="username", placeholder="Enter your Username")}}
+                        <small id="usernameHelp" class="form-text text-muted">Your unique username</small>
+                    </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="passwordInput">{{ form.password.label }}</label>
-                    {{ form.password(class="form-control", id="passwordInput", placeholder="Enter your Password")}}
-                    <small id="passwordHelp" class="form-text text-muted">Your Password</small>
+                <div class="form-group mb-3 row">
+                    <label for="passwordInput" class="col-sm-4 col-form-label">{{ form.password.label }}</label>
+                    <div class="col-sm-7">
+                        {{ form.password(class="form-control border-0", id="passwordInput", placeholder="Enter your Password")}}
+                        <small id="passwordHelp" class="form-text text-muted">Please use a secure password</small>
+                    </div>
+                    
                 </div>
                 <div class="form-group modal-footer">
                     {{ form.submit(class="btn btn-success") }}
@@ -37,13 +48,16 @@ aria-hidden="true">
     </div>
 </div>
 </div>
+<div class="bg-image auth_back p-5">
+
+</div>
 {% endblock %}
 <!--TODO: Button toggle modal, not on page load.-->
 {% block script %}
 <script>
-   /* $(document).ready(function(){
+    $(document).ready(function(){
         $('#exampleModal').modal('show');
     })
-    */
+    
 </script>
 {% endblock %}
