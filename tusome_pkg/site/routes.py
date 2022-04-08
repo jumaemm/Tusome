@@ -11,7 +11,7 @@ def home_page():
     #while i < 15:
         #append to empty list a dictionary with isbn13, title, description, author, book_image
         #book_list.append([{bestsellers_dict.books[i].isbns.isbn13: bestsellers_dict.books[i].title, }])
-    return render_template('site/home.html', session = session)
+    return render_template('site/landing_page.html', session = session)
 
 @bp.route('/reviews')
 def review_page():
