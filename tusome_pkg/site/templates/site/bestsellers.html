@@ -1,6 +1,9 @@
 {% extends 'site/base.html' %}
+{% block title %}
+NYT Bestellers - Hardcover Fiction
+{% endblock %}
 {% block content %}
-<div class="row">
+<div class="row mt-2">
     {% for book in books %}
     <div class="col-sm-3">
     <div class="card mb-3 mx-auto" style="width: 18rem">
@@ -11,8 +14,9 @@
             </a>
           </div>
         <div class="card-body">
-          <h5 class="card-title">{{book.author}}</h5>
-          <p class="card-text">{{book.description}}</p>
+          <h5 class="card-title fw-bold">{{book.title}}</h5>
+          <p class="card-text text-muted fst-italic">{{book.author}}</p>
+          <p class="card-text fw-bold">{{book.description}}</p>
         </div>
       </div>
     </div>
