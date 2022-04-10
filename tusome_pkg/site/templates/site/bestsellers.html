@@ -1,0 +1,21 @@
+{% extends 'site/base.html' %}
+{% block content %}
+<div class="row">
+    {% for book in books %}
+    <div class="col-sm-3">
+    <div class="card mb-3 mx-auto" style="width: 18rem">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <img src="{{book.cover}}" class="img-fluid"style="width: 18rem"/>
+            <a href="#!">
+              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+            </a>
+          </div>
+        <div class="card-body">
+          <h5 class="card-title">{{book.author}}</h5>
+          <p class="card-text">{{book.description}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

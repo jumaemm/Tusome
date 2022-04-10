@@ -3,3 +3,4 @@ myenv
 instance
 auth/__pycache__
 site/__pycache__
+.env
