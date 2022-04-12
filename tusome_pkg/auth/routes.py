@@ -1,4 +1,4 @@
-#TODO: Index(Best Sellers), LogIn, Register, My Reviews, Book, 
+#TODO: LogIn, Register, Logout Error handling
 from statistics import mode
 from passlib.hash import sha256_crypt
 from flask import flash, render_template, session, redirect, url_for, get_flashed_messages

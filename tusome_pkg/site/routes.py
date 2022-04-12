@@ -32,9 +32,20 @@ def bestseller_page():
         #append to empty list a dictionary with isbn13, title, description, author, book_image
         book_list.append({"isbn":isbn13, "title": title, "author":author, "description":description, "cover":cover})
         i+=1
-        print("This is the list: \n" )
-        print(book_list)
     return render_template('site/bestsellers.html', session = session, books = book_list)
+
+@bp.route("/my_reviews")
+def my_reviews():
+    user_reviews = []
+
+    return render_template('site/my_reviews.html', session = session)
+
+#General book reviews
+@bp.route("/book_reviews")
+def book_reviews():
+    
+    return render_template('site/reviews.html')
+
 
 #Make API calls to the NYTimes Books API
 def get_bestsellers():
@@ -42,5 +53,4 @@ def get_bestsellers():
     response = urllib.request.urlopen(url)
     data = response.read()
     dict = json.loads(data)
-    print (dict["results"]["books"])
     return dict["results"]["books"]
