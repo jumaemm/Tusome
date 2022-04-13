@@ -1,8 +1,9 @@
 from xml.dom.expatbuilder import parseString
 from flask import render_template, session
 from tusome_pkg.site import bp 
-#from models import Book
+from tusome_pkg.models import Book, Review, User
 import os, urllib.request, json
+from flask_login import login_required
 
 @bp.route('/home')
 def home_page():
@@ -14,9 +15,11 @@ def home_page():
 def review_page():
     return render_template('site/reviews.html')
 
-@bp.route('/details')
-def book_details():
-    return render_template('site/book_detail.html')
+@bp.route('/details/<isbn>')
+def book_details(book,isbn):
+    print(f'This is the book {book}')
+    book = book
+    return render_template('site/book_details.html')
 
 @bp.route('/bestsellers')
 def bestseller_page():
@@ -35,10 +38,13 @@ def bestseller_page():
     return render_template('site/bestsellers.html', session = session, books = book_list)
 
 @bp.route("/my_reviews")
+@login_required
 def my_reviews():
-    user_reviews = []
+    user = User.query.filter_by(username=session['username']).first()
+    user_id = user.id
+    user_reviews = Review.query.filter_by(user_id = user_id).all()
 
-    return render_template('site/my_reviews.html', session = session)
+    return render_template('site/my_reviews.html', session = session, reviews = user_reviews)
 
 #General book reviews
 @bp.route("/book_reviews")

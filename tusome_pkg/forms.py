@@ -1,4 +1,5 @@
 #TODO: Register, LogIn, Review, Preferences
+from flask import Flask
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
@@ -31,3 +32,7 @@ class LoginForm(FlaskForm):
     username = StringField(label='Username:', validators=[DataRequired()])
     password = PasswordField(label='Password: ', validators=[DataRequired()])
     submit = SubmitField(label='Login')
+
+class ReviewForm(FlaskForm):
+    user = StringField(label='Username', validators=[DataRequired()])
+    review = StringField(label='Review',validators=[Length(min = 100, max = 2000), DataRequired()] )

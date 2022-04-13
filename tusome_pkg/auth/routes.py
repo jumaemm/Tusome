@@ -5,8 +5,9 @@ from flask import flash, render_template, session, redirect, url_for, get_flashe
 from tusome_pkg.auth import bp 
 from tusome_pkg.forms import RegisterForm, LoginForm
 from tusome_pkg.models import User, db, bcrypt
-from flask_login import login_user
+from flask_login import login_user, login_required
 #TODO: Roll register and login modals to site view
+
 
 @bp.route('/login', methods=['GET','POST'])
 def login():
@@ -16,6 +17,7 @@ def login():
         if attempted_user and attempted_user.check_password_correction(password_attempt=form.password.data):
             login_user(attempted_user)
             flash(f'Successfully logged in as: {attempted_user.username}', category='success')
+            session['username'] = form.username.data
             session['logged_in'] = True
             return redirect(url_for('site.home_page'))
         else:
@@ -39,6 +41,7 @@ def register():
     return render_template('auth/register_modal.html', form = form)
 
 @bp.route('/logout')
+@login_required
 def logout():
     session.clear()
     flash("Successfully logged out", category='info')
