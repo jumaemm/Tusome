@@ -43,7 +43,7 @@ class User(db.Model, UserMixin):
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     isbn = db.Column(db.Integer, unique=True)
-    title = db.Column(db.String(400), nullable=False)
+    book_title = db.Column(db.String(400), nullable=False)
     author = db.Column(db.String(120),nullable=False)
     description = db.Column(db.String(1024), nullable=False)
     cover = db.Column(db.String(), nullable=False) 

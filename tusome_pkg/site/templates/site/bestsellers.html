@@ -14,10 +14,10 @@ NYT Bestellers - Hardcover Fiction
             </a>
           </div>
         <div class="card-body">
-          <h5 class="card-title fw-bold">{{book.title}}</h5>
+          <h5 class="card-title fw-bold">{{book.book_title}}</h5>
           <p class="card-text text-muted fst-italic">{{book.author}}</p>
           <p class="card-text fw-bold">{{book.description}}</p>
-          <a class="btn btn-success" href="{{url_for('site.book_details', book = book, isbn = book.isbn)}}">View More</a>
+          <a class="btn btn-success" href="{{url_for('site.book_details', isbn = book.isbn)}}">View More</a>
         </div>
       </div>
     </div>
