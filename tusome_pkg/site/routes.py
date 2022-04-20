@@ -48,6 +48,8 @@ def get_bestsellers():
     data = response.read()
     dict = json.loads(data)
     return dict["results"]["books"]
+
+#Put the bestsellers in list form for the webpage
 def get_bestsellers_list():
     bestsellers_dict = get_bestsellers()
     book_list = []
