@@ -1,7 +1,7 @@
 #TODO: Register, LogIn, Review, Preferences
 from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from tusome_pkg.models import User
 from flask_bcrypt import Bcrypt
@@ -35,5 +35,6 @@ class LoginForm(FlaskForm):
 
 class ReviewForm(FlaskForm):
     user = StringField(label='Username', validators=[DataRequired()])
-    review = StringField(label='Review',validators=[Length(min = 100, max = 2000), DataRequired()])
+    review = TextAreaField(label='Review',validators=[Length(min = 100, max = 2000), DataRequired()])
     book_isbn = StringField(label='Book', validators=[Length()])
+    submit = SubmitField(label='Submit')

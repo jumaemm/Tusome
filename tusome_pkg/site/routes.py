@@ -1,5 +1,7 @@
+from crypt import methods
 from xml.dom.expatbuilder import parseString
 from flask import render_template, session, request
+from tusome_pkg.forms import ReviewForm
 from tusome_pkg.site import bp 
 from tusome_pkg.models import Book, Review, User
 import os, urllib.request, json
@@ -33,6 +35,17 @@ def my_reviews():
     user_reviews = Review.query.filter_by(user_id = user_id).all()
 
     return render_template('site/my_reviews.html', session = session, reviews = user_reviews)
+
+
+@bp.route("/write_review", methods=['GET', 'POST'])
+@login_required
+def write_review(book):
+    review_author = User.query.filter_by(username=session['username']).first()
+    form = ReviewForm()
+    if form.validate_on_submit():
+        review = Review(title = book.book_title, book_review=form.review.data)
+    
+    return render_template('site/write_review.html', session=session, writer=review_author)
 
 #General book reviews
 @bp.route("/book_reviews")
