@@ -35,4 +35,5 @@ class LoginForm(FlaskForm):
 
 class ReviewForm(FlaskForm):
     user = StringField(label='Username', validators=[DataRequired()])
-    review = StringField(label='Review',validators=[Length(min = 100, max = 2000), DataRequired()] )
+    review = StringField(label='Review',validators=[Length(min = 100, max = 2000), DataRequired()])
+    book_isbn = StringField(label='Book', validators=[Length()])

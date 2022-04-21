@@ -49,10 +49,13 @@ class Book(db.Model):
     cover = db.Column(db.String(), nullable=False) 
     reviews = db.relationship('Review', backref='book', lazy=True)
 
+    def __repr__(self) -> str:
+        return self.book_title
+
 #TODO: OWNERS
 
 class Review(db.Model):
-    isbn = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False, unique=True)
     book_review = db.Column(db.String(2028))
     created = db.Column(db.DateTime, default=datetime.now())
