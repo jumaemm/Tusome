@@ -21,8 +21,10 @@ Review {{ book.book_title }}
     </div>
     <div class="col-sm-9">
         <div class="form-outline">
-            <input type="text" id="typeText" class="form-control" />
-            <label class="form-label" for="typeText">Book Title</label>
+            <input type="text" class="form-control" id="reviewerName" placeholder="{{session['username']}}" readonly>
+            <label class="form-label" for="reviewerName">Reviewer</label>
+            <input type="text" class="form-control" id="bookTitle" placeholder="{{book.book_title}}" readonly>
+            <label class="form-label" for="bookTitle">Book Title</label>
             <textarea class="form-control" id="textReview" rows="4"></textarea>
             <label class="form-label" for="textReview">Review</label>
             <div class="form-helper"></div>

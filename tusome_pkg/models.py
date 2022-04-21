@@ -52,7 +52,7 @@ class Book(db.Model):
 #TODO: OWNERS
 
 class Review(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    isbn = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False, unique=True)
     book_review = db.Column(db.String(2028))
     created = db.Column(db.DateTime, default=datetime.now())
