@@ -11,6 +11,8 @@ class Config:
     @staticmethod
     def init_app(app):
         pass
+
+#Additional configs for Development environment
 class DevelopmentConfig(Config):
     DEBUG=True
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -21,11 +23,15 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
         'sqlite:///' + os.path.join(BASE_DIR, "instance//tusome-dev.sqlite")
 
+
+#Additionsl configs for testing environment
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
         'sqlite:///' + os.path.join(BASE_DIR, "instance//tusome-test.sqlite")
 
+
+#Additional configs for Production environment
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(BASE_DIR, "instance//tusome.sqlite")
