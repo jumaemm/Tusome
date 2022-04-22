@@ -1,6 +1,6 @@
 myenv
 */__pycache__/
 instance
-auth/__pycache__
-site/__pycache__
+tusome_pkg/auth/__pycache__
+tusome_pkg/site/__pycache__
 .env
