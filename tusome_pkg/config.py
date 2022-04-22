@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
-    SECRET_KEY='8549c630be55c1f8d724e4dc' 
+    SECRET_KEY=os.environ.get('SECRET_KEY') 
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     TUSOME_MAIL_SUBJECT_PREFIX = '[Tusome]'
     TUSOME_MAIL_SENDER = 'TUSOME Admin <tusome@example.com>'
