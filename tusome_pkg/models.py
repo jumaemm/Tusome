@@ -4,7 +4,7 @@ from enum import unique
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager, UserMixin, current_user
 from datetime import datetime
 
 bcrypt = Bcrypt()
@@ -24,6 +24,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(60), nullable=False)
     books = db.relationship('Book', secondary=books_users, backref='users' , lazy=True)
     reiews = db.relationship('Review', backref = 'user', lazy = True)
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
     @property
     def password(self):
@@ -36,7 +37,13 @@ class User(db.Model, UserMixin):
     def check_password_correction(self, password_attempt):
         return bcrypt.check_password_hash(self.password_hash, password_attempt)
             
-    
+    def can(self, permissions):
+        return self.role is not None and \
+            (self.role.permissions & permissions) == permissions
+
+    def is_administrator(self):
+        return self.can(Permission.ADMINISTER)
+
     def __repr__(self) -> str:
         return f'User: {self.username}'
 
