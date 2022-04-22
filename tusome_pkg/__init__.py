@@ -1,27 +1,17 @@
-import os
+
 from flask import Flask
 from tusome_pkg.auth import bp as auth_bp
 from tusome_pkg.site import bp as site_bp
 from tusome_pkg.models import db
 from flask_login import LoginManager
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+from tusome_pkg.config import config
 
 
-def create_app(test_config=None):
+
+def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-        SECRET_KEY='8549c630be55c1f8d724e4dc',
-        SQLALCHEMY_DATABASE_URI='sqlite:///' + os.path.join(BASE_DIR, "instance//tusome.db") ,
-    )
-    if test_config is None:
-        app.config.from_pyfile('config.py', silent=True)
-    else:
-        app.config.from_mapping(test_config)
-
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
+    app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
     app.register_blueprint(auth_bp,url_prefix='/auth')
     app.register_blueprint(site_bp)
     app.add_url_rule('/', endpoint='site.home_page')
