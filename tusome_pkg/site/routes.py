@@ -1,6 +1,6 @@
 
 from xml.dom.expatbuilder import parseString
-from flask import render_template, session, request
+from flask import flash, render_template, session, request
 from tusome_pkg.forms import ReviewForm
 from tusome_pkg.site import bp 
 from tusome_pkg.models import Book, Review, User
@@ -40,16 +40,19 @@ def my_reviews():
 @bp.route("/write_review", methods=['GET', 'POST'])
 @login_required
 def write_review(book):
+    # Has to be a better way to do this than query the db three times
     review_author = User.query.filter_by(username=session['username']).first()
+    user_id = User.query.filter_by(username=review_author).first().id
+    book_id = Book.query.filter_by(book_title=book.book_title).first().id
     form = ReviewForm()
     if form.validate_on_submit():
-        review = Review(title = book.book_title, book_review=form.review.data)
-    
+        review = Review(title = book.book_title, book_review=form.review.data, user_id=user_id)
+        flash("Review successfully posted", category='success')
     return render_template('site/write_review.html', session=session, writer=review_author)
 
 #General book reviews
 @bp.route("/book_reviews")
-def book_reviews():
+def book_reviews(book):
     
     return render_template('site/reviews.html')
 
