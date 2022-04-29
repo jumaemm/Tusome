@@ -40,6 +40,7 @@ def my_reviews():
 @bp.route("/write_review", methods=['GET', 'POST'])
 @login_required
 def write_review(book):
+    #TODO: Write unit test for a dummy review
     # Has to be a better way to do this than query the db three times
     review_author = User.query.filter_by(username=session['username']).first()
     user_id = User.query.filter_by(username=review_author).first().id
