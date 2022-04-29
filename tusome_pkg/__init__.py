@@ -15,10 +15,11 @@ def create_app(config_name):
     app.register_blueprint(auth_bp,url_prefix='/auth')
     app.register_blueprint(site_bp)
     app.add_url_rule('/', endpoint='site.home_page')
-    from tusome_pkg.models import User, Book, Review
+    from tusome_pkg.models import User, Book, Review, Role
     db.init_app(app)
     with app.app_context():
         db.create_all()
+        Role.insert_roles()
     login_manager = LoginManager(app)
 
     @login_manager.user_loader
