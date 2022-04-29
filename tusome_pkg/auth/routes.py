@@ -19,7 +19,7 @@ def login():
             flash(f'Successfully logged in as: {attempted_user.username}', category='success')
             session['username'] = form.username.data
             session['logged_in'] = True
-            return redirect(url_for('site.home_page'))
+            return redirect(url_for('site.bestseller_page'))
         else:
             flash('Username or password incorrect, please try again', category='danger')
     return render_template('auth/login_modal.html', form = form)
