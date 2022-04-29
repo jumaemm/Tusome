@@ -12,20 +12,20 @@
     font-weight: 600;
 }
 #landing_back {
-    height: 800px;
+    height: 100vh;
     background-image: url("../static/images/alfons-morales-YLSwjSy7stw-unsplash.jpg");
   }
 
   /* Height for devices smaller than 640px */
   @media (max-width: 640px) {
     #landing_back {
-      height: 400px;
+      height: 100vh;
     }
   }
   /* Height for devices between 641px and 1200px*/
   @media (max-width: 1200px) {
     #landing_back {
-      height: 500px;
+      height: 100vh;
     }
   }
   body {
@@ -33,7 +33,7 @@
   }
   .auth_back{
       background-image: url("../static/images/alfons-morales-YLSwjSy7stw-unsplash.jpg");
-      height: 800px;
+      height: 100vh;
       background-size: cover;
   }
   .gradient-custom {
