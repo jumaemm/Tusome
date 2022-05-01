@@ -1,17 +1,35 @@
 
 from xml.dom.expatbuilder import parseString
 from flask import flash, render_template, session, request
-from tusome_pkg.forms import ReviewForm
+from tusome_pkg.forms import ReviewForm, BookForm
 from tusome_pkg.site import bp 
-from tusome_pkg.models import Book, Review, User
+from tusome_pkg.models import Book, Review, User, db
 import os, urllib.request, json
 from flask_login import login_required
+from decorators import admin_required
 
 @bp.route('/home')
 def home_page():
     
 
     return render_template('site/landing_page.html', session = session)
+
+@bp.route('/upload')
+@login_required
+@admin_required
+def book_upload():
+    form = BookForm()
+    if form.validate_on_submit():
+        book = Book(isbn = form.isbn.data,
+                    book_title = form.book_title.data,
+                    author = form.author.data,
+                    description = form.description.data,
+                    cover = form.cover.data)
+        db.session.add(book)
+        db.session.commit()
+        flash(f'Successfully uploaded {form.book_title.data}', category='SUCCESS')
+    
+
 
 @bp.route('/reviews')
 def review_page():
