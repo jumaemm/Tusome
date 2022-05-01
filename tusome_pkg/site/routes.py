@@ -1,6 +1,6 @@
 
 from xml.dom.expatbuilder import parseString
-from flask import flash, render_template, session, request
+from flask import flash, redirect, render_template, session, request, url_for
 from tusome_pkg.forms import ReviewForm, BookForm
 from tusome_pkg.site import bp 
 from tusome_pkg.models import Book, Review, User, db
@@ -28,6 +28,8 @@ def book_upload():
         db.session.add(book)
         db.session.commit()
         flash(f'Successfully uploaded {form.book_title.data}', category='SUCCESS')
+        return redirect(url_for('site.landing_page.html'))
+    return render_template('site/upload_book.html', form = form)
     
 
 
