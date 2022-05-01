@@ -31,14 +31,14 @@ Upload Book
         <div class="form-group mb-3 row">
             <label for="description", class="col-form-label col-sm-4 fw-bolder">{{ form.description.label }}</label>
             <div class="col-sm-7">
-                {{ form.description(class="form-control border-0", id="book_title", placeholder="Enter the description of the book: ")}}
+                {{ form.description(class="form-control border-0", id="description", placeholder="Enter the description of the book: ")}}
                 <small id="descriptionHelp" class="form-text text-muted">Decsription</small>
             </div>
         </div>
         <div class="form-group mb-3 row">
             <label for="cover", class="col-form-label col-sm-4 fw-bolder">{{ form.cover.label }}</label>
             <div class="col-sm-7">
-                {{ form.cover(class="form-control border-0", id="book_title", placeholder="Enter the URL of the book cover: ")}}
+                {{ form.cover(class="form-control border-0", id="cover", placeholder="Enter the URL of the book cover: ")}}
                 <small id="coverHelp" class="form-text text-muted">Cover URL</small>
             </div>
         </div>
