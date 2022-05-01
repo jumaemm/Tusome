@@ -6,7 +6,7 @@ from tusome_pkg.site import bp
 from tusome_pkg.models import Book, Review, User, db
 import os, urllib.request, json
 from flask_login import login_required
-from decorators import admin_required
+from tusome_pkg.decorators import admin_required
 
 @bp.route('/home')
 def home_page():
