@@ -14,7 +14,7 @@ def home_page():
 
     return render_template('site/landing_page.html', session = session)
 
-@bp.route('/upload')
+@bp.route('/upload', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def book_upload():

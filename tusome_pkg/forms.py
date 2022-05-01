@@ -46,3 +46,4 @@ class BookForm(FlaskForm):
     author= StringField(label='Author', validators=[Length(min=1,  max= 200), DataRequired()])
     description = TextAreaField(label='Description', validators=[Length(min=1,  max= 200), DataRequired()])
     cover = URLField(label='Cover URL: ')
+    submit = SubmitField(label='Submit')
