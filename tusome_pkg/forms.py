@@ -1,7 +1,8 @@
 #TODO: Register, LogIn, Review, Preferences
+from statistics import covariance
 from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, IntegerField, URLField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from tusome_pkg.models import User
 from flask_bcrypt import Bcrypt
@@ -38,3 +39,10 @@ class ReviewForm(FlaskForm):
     review = TextAreaField(label='Review',validators=[Length(min = 100, max = 2000), DataRequired()])
     book_isbn = StringField(label='Book', validators=[Length(min=13)])
     submit = SubmitField(label='Submit')
+
+class BookForm(FlaskForm):
+    isbn = IntegerField(label='ISBN13:', validators=[Length(min=13), DataRequired()])
+    book_title = StringField(label='Title', validators=[Length(min=1,  max= 200), DataRequired()])
+    author= StringField(label='Author', validators=[Length(min=1,  max= 200), DataRequired()])
+    description = TextAreaField(label='Description', validators=[Length(min=1,  max= 200), DataRequired()])
+    cover = URLField(label='Cover URL: ')
