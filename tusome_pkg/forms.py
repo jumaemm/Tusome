@@ -41,7 +41,7 @@ class ReviewForm(FlaskForm):
     submit = SubmitField(label='Submit')
 
 class BookForm(FlaskForm):
-    isbn = IntegerField(label='ISBN13:', validators=[Length(min=13), DataRequired()])
+    isbn = StringField(label='ISBN13:', validators=[Length(min=13), DataRequired()])
     book_title = StringField(label='Title', validators=[Length(min=1,  max= 200), DataRequired()])
     author= StringField(label='Author', validators=[Length(min=1,  max= 200), DataRequired()])
     description = TextAreaField(label='Description', validators=[Length(min=1,  max= 200), DataRequired()])
