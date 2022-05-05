@@ -28,7 +28,7 @@ def book_upload():
         db.session.add(book)
         db.session.commit()
         flash(f'Successfully uploaded {form.book_title.data}', category='SUCCESS')
-        return redirect(url_for('site.landing_page.html'))
+        return redirect(url_for('site.landing_page'))
     return render_template('site/upload_book.html', form = form)
     
 
