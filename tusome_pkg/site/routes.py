@@ -35,7 +35,8 @@ def book_upload():
 
 @bp.route('/reviews')
 def review_page():
-    return render_template('site/reviews.html')
+    review_list = Review.query.all()
+    return render_template('site/reviews.html', reviews = review_list)
 
 @bp.route('/details/<isbn>')
 def book_details(isbn):
