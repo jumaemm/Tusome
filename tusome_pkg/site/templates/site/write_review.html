@@ -20,15 +20,34 @@ Review {{ book.book_title }}
         </div>
     </div>
     <div class="col-sm-9">
-        <div class="form-outline">
-            <input type="text" class="form-control" id="reviewerName" placeholder="{{session['username']}}" readonly>
-            <label class="form-label" for="reviewerName">Reviewer</label>
-            <input type="text" class="form-control" id="bookTitle" placeholder="{{book.book_title}}" readonly>
-            <label class="form-label" for="bookTitle">Book Title</label>
-            <textarea class="form-control" id="textReview" rows="4"></textarea>
-            <label class="form-label" for="textReview">Review</label>
-            <div class="form-helper"></div>
+        <form method="POST">
+          {{ form.hidden_tag() }}
+          <div class="form-group mb-3 row">
+            <label for="username" class="col-sm-4 col-form-label">{{ form.user.label }}</label>
+            <div class="col-sm-7">
+                {{ form.user(class="form-control border-0", id="username", readonly = "readonly", value = writer.username)}}
+                <small id="usernameHelp" class="form-text text-muted">Your username</small>
+            </div>
           </div>
+            <div class="form-group mb-3 row">
+              <label for="book_isbn" class="col-sm-4 col-form-label">{{ form.book_isbn.label }}</label>
+              <div class="col-sm-7">
+                  {{ form.book_isbn(class="form-control border-0", id="book_isbn", readonly = "readonly", value = book.isbn)}}
+                  <small id="isbnHelp" class="form-text text-muted">The Book's ISBN</small>
+              </div>
+            </div>
+            <div class="form-group mb-3 row">
+              <label for="review" class="col-sm-4 col-form-label">{{ form.review.label }}</label>
+              <div class="col-sm-7">
+                  {{ form.review(class="form-control border-0", id="review", placeholder="Enter The Review")}}
+                  <small id="reviewHelp" class="form-text text-muted">Your Review</small>
+              </div>
+            </div>
+            <div class="form-group">
+              {{ form.submit(class="btn material_btn text-white") }}
+          </div>
+        </form>
+
     </div>
 </div>
 {% endblock %}
