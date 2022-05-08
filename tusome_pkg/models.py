@@ -65,8 +65,10 @@ class Book(db.Model):
     reviews = db.relationship('Review', backref='book', lazy=True)
 
     def __repr__(self) -> str:
-        return self.book_title
+        return f'Book: {self.book_title}'
 
+    def __str__(self) -> str:
+        return f'Book: {self.book_title}'
 #TODO: OWNERS
 
 class Review(db.Model):
