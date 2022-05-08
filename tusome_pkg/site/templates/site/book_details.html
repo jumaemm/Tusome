@@ -16,6 +16,7 @@
             <h5 class="card-text fw-bold">{{book.book_title}}</h5>
             <p class="card-text text-muted fst-italic">{{book.author}}</p>
             <p class="card-text fw-bold">{{book.description}}</p>
+            <a class="btn btn-primary" href="{{url_for('site.write_review')}}"> Review Book </a>
           </div>
         </div>
     {% endblock %}
