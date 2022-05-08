@@ -32,15 +32,10 @@ def book_upload():
     return render_template('site/upload_book.html', form = form)
     
 
-
-@bp.route('/reviews')
-def review_page():
-    review_list = Review.query.all()
-    return render_template('site/reviews.html', reviews = review_list)
-
 @bp.route('/details/<isbn>')
 def book_details(isbn):
     book = get_book_from_bestsellers(isbn)
+    session['current_book'] = book
     return render_template('site/book_details.html', book=book, session=session)
 
 @bp.route('/bestsellers')
@@ -60,25 +55,30 @@ def my_reviews():
 
 @bp.route("/write_review", methods=['GET', 'POST'])
 @login_required
-def write_review(book):
+def write_review():
     #TODO: Write unit test for a dummy review
     # Has to be a better way to do this than query the db three times
+    book = session['current_book']
+    print (book)
     review_author = User.query.filter_by(username=session['username']).first()
-    user_id = User.query.filter_by(username=review_author).first().id
-    book_id = Book.query.filter_by(book_title=book.book_title).first().id
+    print (review_author)
+    user_id = User.query.filter_by(username=review_author.username).first().id
+    book_id = Book.query.filter_by(book_title=book['book_title']).first().id
     form = ReviewForm()
     if form.validate_on_submit():
-        review = Review(title = book.book_title, book_review=form.review.data, user_id=user_id, book_id = book_id)
+        review = Review(title = book['book_title'], book_review=form.review.data, user_id=user_id, book_id = book_id)
         db.session.add(review)
         db.session.commit()
         flash("Review successfully posted", category='success')
-    return render_template('site/write_review.html', session=session, writer=review_author)
+        return redirect(url_for('site.home_page'))
+    
+    return render_template('site/write_review.html', session=session, writer=review_author, book = book, form = form)
 
 #General book reviews
 @bp.route("/book_reviews")
 def book_reviews(book):
-    
-    return render_template('site/reviews.html')
+    review_list = Review.query.all()
+    return render_template('site/reviews.html', reviews = review_list)
 
 
 #Make API calls to the NYTimes Books API
@@ -111,3 +111,20 @@ def get_book_from_bestsellers(isbn):
         if isbn == book["isbn"]:
             return book
     return 
+
+#TODO: Set up cronjob to run this every week
+def upload_bestsellers():
+    bestsellers_dict = get_bestsellers()
+    i = 0
+    while i < 15:
+        isbn13 = bestsellers_dict[i]["primary_isbn13"]
+        author = bestsellers_dict[i]["author"]
+        book_title = bestsellers_dict[i]["title"]
+        description = bestsellers_dict[i]["description"]
+        cover = bestsellers_dict[i]["book_image"]
+        
+        book = Book(isbn = isbn13, book_title = book_title, author = author, description = description, cover = cover)
+        db.session.add(book)
+        i+=1
+    db.session.commit()
+    
