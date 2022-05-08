@@ -67,7 +67,9 @@ def write_review(book):
     book_id = Book.query.filter_by(book_title=book.book_title).first().id
     form = ReviewForm()
     if form.validate_on_submit():
-        review = Review(title = book.book_title, book_review=form.review.data, user_id=user_id)
+        review = Review(title = book.book_title, book_review=form.review.data, user_id=user_id, book_id = book_id)
+        db.session.add(review)
+        db.session.commit()
         flash("Review successfully posted", category='success')
     return render_template('site/write_review.html', session=session, writer=review_author)
 
