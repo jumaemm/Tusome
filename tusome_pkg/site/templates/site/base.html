@@ -21,7 +21,10 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid px-5">
-      <a class="navbar-brand" href="#">TUSOME</a>
+      <a class="navbar-brand" href="#">
+        <img src="../../../static/images/_d742cb9d-94ff-4ed6-92b5-43099e20601f.jpeg" width = "50" height = "50">
+        TUSOME
+      </a>
       <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -52,10 +55,10 @@
         {% if messages %}
           {% for category, message in messages %}
           <div class="alert alert-{{ category }}">
-            <div class="txt-info">{{ message }}</div>
             <button type="button" class="m1-2 mb-1 close" data-mdb-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+            <div class="txt-info">{{ message }}</div>
           </div>
           {% endfor %}
         {% endif %}
