@@ -84,13 +84,10 @@ def book_reviews(book):
 
 #Make API calls to the NYTimes Books API
 def get_bestsellers():
-    print("I got here before the API call")
     url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key={}".format(os.environ.get("NYT_APIKEY"))
-    print("API not calling back :-(")
     response = urllib.request.urlopen(url)
     data = response.read()
     dict = json.loads(data)
-    print(dict)
     return dict["results"]["books"]
 
 def get_bestsellers_list():
