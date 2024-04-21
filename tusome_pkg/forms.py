@@ -1,14 +1,12 @@
 #TODO: Register, LogIn, Review, Preferences
-from statistics import covariance
 from flask import Flask
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, IntegerField, URLField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from tusome_pkg.models import User
-from flask_bcrypt import Bcrypt
+#from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
-bcrypt = Bcrypt()
 login_manager = LoginManager()
 class RegisterForm(FlaskForm):
     #Catch any errors due to similar username
