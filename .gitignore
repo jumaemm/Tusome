@@ -4,3 +4,4 @@ instance
 tusome_pkg/auth/__pycache__
 tusome_pkg/site/__pycache__
 .env
+virtualenv/
