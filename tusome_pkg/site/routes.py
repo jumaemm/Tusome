@@ -35,6 +35,7 @@ def book_upload():
 @bp.route('/details/<isbn>')
 def book_details(isbn):
     book = get_book_from_bestsellers(isbn)
+    print("Made it here but timing out")
     session['current_book'] = book
     return render_template('site/book_details.html', book=book, session=session)
 
@@ -83,14 +84,19 @@ def book_reviews(book):
 
 #Make API calls to the NYTimes Books API
 def get_bestsellers():
+    print("I got here before the API call")
     url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key={}".format(os.environ.get("NYT_APIKEY"))
+    print("API not calling back :-(")
     response = urllib.request.urlopen(url)
     data = response.read()
     dict = json.loads(data)
+    print(dict)
     return dict["results"]["books"]
 
-#Put the bestsellers in list form for the webpage
 def get_bestsellers_list():
+    """
+    Runs get_bestsellers() and returns a list of dictionaries with isbn13, title, description, author, book_image
+    """
     bestsellers_dict = get_bestsellers()
     book_list = []
     i = 0
@@ -100,9 +106,15 @@ def get_bestsellers_list():
         book_title = bestsellers_dict[i]["title"]
         description = bestsellers_dict[i]["description"]
         cover = bestsellers_dict[i]["book_image"]
+        book = Book(isbn = isbn13, book_title = book_title, author = author, description = description, cover = cover)
+        if Book.query.filter_by(isbn = isbn13).first():
+            pass
+        else:
+            db.session.add(book)
         #append to empty list a dictionary with isbn13, title, description, author, book_image
         book_list.append({"isbn":isbn13, "book_title": book_title, "author":author, "description":description, "cover":cover})
         i+=1
+    db.session.commit()
     return book_list
 
 def get_book_from_bestsellers(isbn):
@@ -112,19 +124,4 @@ def get_book_from_bestsellers(isbn):
             return book
     return 
 
-#TODO: Set up cronjob to run this every week
-def upload_bestsellers():
-    bestsellers_dict = get_bestsellers()
-    i = 0
-    while i < 15:
-        isbn13 = bestsellers_dict[i]["primary_isbn13"]
-        author = bestsellers_dict[i]["author"]
-        book_title = bestsellers_dict[i]["title"]
-        description = bestsellers_dict[i]["description"]
-        cover = bestsellers_dict[i]["book_image"]
-        
-        book = Book(isbn = isbn13, book_title = book_title, author = author, description = description, cover = cover)
-        db.session.add(book)
-        i+=1
-    db.session.commit()
     
