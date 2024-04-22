@@ -57,19 +57,20 @@
       </div>
     </div>
   </nav>
+  <div class = "row bg-dark">
       {% with messages=get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
-          <div class="alert alert-{{ category }}">
-            <button type="button" class="m1-2 mb-1 close" data-mdb-dismiss="alert" aria-label="Close">
+          <div class="alert alert-{{ category }} bg-dark text-light">
+            <button type="button" class="m1-2 mb-1 close col-1" data-mdb-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <div class="txt-info">{{ message }}</div>
+            <div class="txt-info col-3">{{ message }}</div>
           </div>
           {% endfor %}
         {% endif %}
       {% endwith %}
-      
+    </div>    
         {% block content %}
         {% endblock %}
       
