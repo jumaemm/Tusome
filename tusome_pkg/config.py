@@ -7,7 +7,7 @@ class Config:
     TUSOME_MAIL_SUBJECT_PREFIX = '[Tusome]'
     TUSOME_MAIL_SENDER = 'TUSOME Admin <tusome@example.com>'
     TUSOME_ADMIN = os.environ.get('TUSOME_ADMIN')
-
+    PERMANENT_SESSION_LIFETIME = 3600
     @staticmethod
     def init_app(app):
         pass
