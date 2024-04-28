@@ -11,6 +11,11 @@
     font-family: Raleway;
     font-weight: 600;
 }
+.img-icon{
+  height: 5rem;
+  width: 5rem;
+  margin: 3rem;
+}
 #landing_back {
     height: 100vh;
     background-image: url("../static/images/alfons-morales-YLSwjSy7stw-unsplash.jpg");
