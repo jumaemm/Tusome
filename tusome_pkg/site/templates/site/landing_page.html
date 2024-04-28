@@ -9,13 +9,19 @@ class="p-5 text-center bg-image"
 >
     <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
         <div class="d-flex h-100">
-            <img class="float-start" src="../../../static/images/_d742cb9d-94ff-4ed6-92b5-43099e20601f.jpeg" width = "2vw" height = "2vw">
             <div class="text-white p-4">
+                <img class="float-start img-icon" src="../../../static/images/_d742cb9d-94ff-4ed6-92b5-43099e20601f.jpeg">
                 <p class="mb-3 tusome_title text-start" style="font-size: 6vw">TUSOME</p>
                 <p class="mb-4 text-start" style="font-size: 2vw">Do you love literature? Are you eager to take a deep dive into discussions on your favorite fictional books? Do you want to be part of a community that also loves books? Look no further! Tusome is where your discussions can go to thrive and explore your favorite stories from entirely new angles.</p>
+                {% if session['logged_in'] %}
+                <a class="btn btn-outline-light btn-lg float-start" href="{{url_for('site.bestseller_page')}}">
+                    VIEW THE NYC HARDCOVER FICTION BESTSELLERS
+                </a>
+                {% else %}
                 <a class="btn btn-outline-light btn-lg float-start" href="{{url_for('auth.register')}}">
                     SIGN UP NOW
                 </a>
+                {% endif %}
             </div>
         </div>
     </div>
