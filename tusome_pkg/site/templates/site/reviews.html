@@ -3,23 +3,29 @@
     Reviews
     {% endblock %}
     {% block content %}
-        <div >
-            <div class="bg-image hover-overlay ripple rounded" data-mdb-ripple-color="light">
-                <img src="{{book.cover}}" class="img-fluid"style="width: 18rem"/>
-                <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-            </div>
-            {% for review in reviews %}
-            <div class="row container-fluid">
-                <div class=" col-sm-4 mt-4 ms-5 py-3 border-right" style="width: 18rem">
-                    <h5 class=" fw-bold">{{review.review_title}}</h5>
-                    <p class=" text-muted fst-italic">{{review.review}}</p>
+        <div class="container-fluid review_container ">
+            <div class="col">
+                <div class="bg-image hover-overlay ripple rounded p-4 row" data-mdb-ripple-color="light">
+                    <img src="{{book.cover}}" class="img-fluid"style="width: 12rem"/>
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
                 </div>
-                <div>
-                    
-                </div>
+                    <p class="row h2 fw-bold pl-4">{{book.author}}</p>
+                    <p class="row fw-light pl-4">{{book.description}}</p>
             </div>
+            <div>
+                {% for review in reviews %}
+                <div class="row">
+                    <div class=" col-sm-4 mt-4 ms-5 py-3 border-right" style="width: 18rem">
+                        <h5 class=" fw-bold">{{review.review_title}}</h5>
+                        <p class="text-lght">{{review.book_review}}</p>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
             {% endfor %}
+            </div>
         </div>
     {% endblock %}
