@@ -16,7 +16,9 @@
             <h5 class="card-text fw-bold">{{book.book_title}}</h5>
             <p class="card-text text-muted fst-italic">{{book.author}}</p>
             <p class="card-text fw-bold">{{book.description}}</p>
-            <a class="btn btn-primary" href="{{url_for('site.write_review')}}"> Review Book </a>
+            <a class="btn btn-primary col-sm-3" href="{{url_for('site.write_review')}}"> Review Book </a>
+            <span class= "m-1"></span>
+            <a class="btn btn-success col-sm-3" href="{{url_for('site.book_reviews', isbn = book.isbn)}}"> Book Reviews </a>
           </div>
         </div>
     {% endblock %}
