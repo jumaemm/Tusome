@@ -35,7 +35,6 @@ def book_upload():
 @bp.route('/details/<isbn>')
 def book_details(isbn):
     book = get_book_from_bestsellers(isbn)
-    print("Made it here but timing out")
     session['current_book'] = book
     return render_template('site/book_details.html', book=book, session=session)
 
@@ -64,10 +63,11 @@ def write_review():
     review_author = User.query.filter_by(username=session['username']).first()
     print (review_author)
     user_id = User.query.filter_by(username=review_author.username).first().id
-    book_id = Book.query.filter_by(book_title=book['book_title']).first().id
+    book_id = Book.query.filter_by(isbn=book['isbn']).first().isbn
+    print ("This is the book ID: " + str(book_id))
     form = ReviewForm()
     if form.validate_on_submit():
-        review = Review(title = book['book_title'], book_review=form.review.data, user_id=user_id, book_id = book_id)
+        review = Review(review_title = form.review_title.data, book_review=form.review.data, user_id=user_id, book_id = book_id)
         db.session.add(review)
         db.session.commit()
         flash("Review successfully posted", category='success')
@@ -76,10 +76,14 @@ def write_review():
     return render_template('site/write_review.html', session=session, writer=review_author, book = book, form = form)
 
 #General book reviews
-@bp.route("/book_reviews")
-def book_reviews(book):
-    review_list = Review.query.all()
-    return render_template('site/reviews.html', reviews = review_list)
+@bp.route("/book_reviews/<isbn>")
+def book_reviews(isbn):
+    book = get_book_from_bestsellers(isbn)
+    print ("This is the book: \n" + str(book))
+    review_list = Review.query.filter_by(book_id = book['isbn']).all()
+    print ("This is the review list right here lads")
+    print (review_list)
+    return render_template('site/reviews.html', reviews = review_list, book = book)
 
 
 #Make API calls to the NYTimes Books API
