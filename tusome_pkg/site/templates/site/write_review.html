@@ -37,6 +37,13 @@ Review {{ book.book_title }}
               </div>
             </div>
             <div class="form-group mb-3 row">
+              <label for="review_title" class="col-sm-4 col-form-label">{{ form.review_title.label }}</label>
+              <div class="col-sm-7">
+                  {{ form.review_title(class="form-control border-0", id="review_title", placeholder="Please type in a brief title of your review")}}
+                  <small id="isbnHelp" class="form-text text-muted">The Review title</small>
+              </div>
+            </div>
+            <div class="form-group mb-3 row">
               <label for="review" class="col-sm-4 col-form-label">{{ form.review.label }}</label>
               <div class="col-sm-7">
                   {{ form.review(class="form-control border-0", id="review", placeholder="Enter The Review")}}
