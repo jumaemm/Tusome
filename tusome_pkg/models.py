@@ -73,10 +73,10 @@ class Book(db.Model):
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False, unique=True)
+    review_title = db.Column(db.String(200), nullable=False)
     book_review = db.Column(db.String(2028))
     created = db.Column(db.DateTime, default=datetime.now())
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('book.isbn'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
 class Role(db.Model):
