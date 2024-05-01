@@ -3,7 +3,7 @@
     Reviews
     {% endblock %}
     {% block content %}
-        <div class="container-fluid review_container ">
+        <div class="container-fluid review_container">
             <div class="col">
                 <div class="bg-image hover-overlay ripple rounded p-4 row" data-mdb-ripple-color="light">
                     <img src="{{book.cover}}" class="img-fluid"style="width: 12rem"/>
@@ -12,7 +12,7 @@
                     </a>
                 </div>
                     <p class="row h2 fw-bold pl-4">{{book.author}}</p>
-                    <p class="row fw-light pl-4">{{book.description}}</p>
+                    <p class="row pl-4">{{book.description}}</p>
             </div>
             <div>
                 {% for review in reviews %}
